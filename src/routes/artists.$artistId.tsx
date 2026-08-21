@@ -106,11 +106,20 @@ function ArtistPage() {
                   <h3 className="font-display text-3xl leading-tight">{p.name}</h3>
                   <p className="mt-3 text-sm text-muted-foreground">{p.detail}</p>
                 </div>
-                <div className="mt-8 flex items-center justify-between">
+                <div className="mt-8 flex items-center justify-between gap-3">
                   <span className="font-display text-2xl text-copper">{p.price}</span>
-                  <button className="rounded-full border border-border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-copper hover:text-primary-foreground">
-                    Buy direct
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      to="/ar"
+                      search={{ art: artist.id }}
+                      className="rounded-full border border-border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-accent"
+                    >
+                      View in AR
+                    </Link>
+                    <button className="rounded-full border border-border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-copper hover:text-primary-foreground">
+                      Buy direct
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
