@@ -145,11 +145,22 @@ function ArStudio() {
   const addPiece = (artistId: string) => {
     const maxZ = placed.length > 0 ? Math.max(...placed.map((p) => p.zIndex)) : 0;
     const count = placed.length;
+    // Offset presets so added pieces don't stack on the initial one.
+    const presets = [
+      [50, 45],
+      [28, 32],
+      [72, 32],
+      [28, 62],
+      [72, 62],
+      [50, 24],
+      [50, 68],
+    ];
+    const [x, y] = presets[count % presets.length]!;
     const newPiece: PlacedPiece = {
       instanceId: nextId(),
       artistId,
-      x: 50 + (count % 3 - 1) * 8,
-      y: 45 + Math.floor(count / 3) * 8,
+      x,
+      y,
       scale: 45,
       tilt: 0,
       framed: true,
