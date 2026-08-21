@@ -81,11 +81,9 @@ function ArStudio() {
     [art],
   );
 
-  const initialPieceId = useMemo(() => nextId(), []);
-
   const [placed, setPlaced] = useState<PlacedPiece[]>([
     {
-      instanceId: initialPieceId,
+      instanceId: baseId,
       artistId: initialArtistId,
       x: 50,
       y: 45,
@@ -95,7 +93,7 @@ function ArStudio() {
       zIndex: 0,
     },
   ]);
-  const [selectedId, setSelectedId] = useState<string>(initialPieceId);
+  const [selectedId, setSelectedId] = useState<string>(baseId);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
