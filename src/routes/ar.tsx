@@ -106,7 +106,7 @@ function ArStudio() {
   const [shot, setShot] = useState<string | null>(null);
 
   const selected = useMemo(
-    () => placed.find((p) => p.instanceId === selectedId) ?? placed[0] ?? null,
+    () => placed.find((p) => p.instanceId === selectedId) ?? null,
     [placed, selectedId],
   );
 
