@@ -384,7 +384,10 @@ function ArStudio() {
           <div className="flex flex-col gap-8 border border-border/60 p-6">
             <div className="flex gap-1 border border-border/60 p-1">
               <button
-                onClick={() => setMode("single")}
+                onClick={() => {
+                  setMode("single");
+                  setSelectedId((prev) => (prev && placed.some((p) => p.instanceId === prev)) ? prev : placed[0]?.instanceId ?? "");
+                }}
                 className={`flex-1 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors ${
                   mode === "single"
                     ? "bg-copper text-primary-foreground"
@@ -396,7 +399,11 @@ function ArStudio() {
               <button
                 onClick={() => {
                   setMode("gallery");
-                  if (placed.length === 0) addPiece(initialArtistId);
+                  if (placed.length === 0) {
+                    addPiece(initialArtistId);
+                  } else {
+                    setSelectedId((prev) => (prev && placed.some((p) => p.instanceId === prev)) ? prev : placed[0]!.instanceId);
+                  }
                 }}
                 className={`flex-1 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors ${
                   mode === "gallery"
