@@ -299,7 +299,11 @@ function ArStudio() {
             <button
               onClick={() => {
                 setMode("gallery");
-                if (placed.length === 0) addPiece(initialArtistId);
+                if (placed.length === 0) {
+                  addPiece(initialArtistId);
+                } else {
+                  setSelectedId((prev) => (prev && placed.some((p) => p.instanceId === prev)) ? prev : placed[0]!.instanceId);
+                }
               }}
               className="inline-flex items-center gap-2 rounded-full border border-border/70 px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition-colors hover:bg-accent"
             >
