@@ -3,13 +3,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Camera, Download, RotateCcw, X } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
-import { artists, images } from "@/lib/kala-data";
+import { artists } from "@/lib/kala-data";
 
-type ArSearch = { art?: string };
+type ArSearch = { art?: string | undefined };
 
 export const Route = createFileRoute("/ar")({
   validateSearch: (search: Record<string, unknown>): ArSearch => ({
-    art: typeof search.art === "string" ? search.art : undefined,
+    art: typeof search['art'] === "string" ? (search['art'] as string) : undefined,
   }),
   head: () => ({
     meta: [
@@ -48,7 +48,7 @@ function ArStudio() {
   const [live, setLive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState(
-    pieces.find((p) => p.id === art) ?? pieces[0],
+    pieces.find((p) => p.id === art) ?? pieces[0]!,
   );
   const [pos, setPos] = useState({ x: 50, y: 45 });
   const [scale, setScale] = useState(45);
