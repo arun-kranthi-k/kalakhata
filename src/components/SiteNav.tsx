@@ -4,7 +4,7 @@ const links = [
   { to: "/", label: "Feed" },
   { to: "/explore", label: "Explore" },
   { to: "/map", label: "Map" },
-  { to: "/ar", label: "AR" },
+  { to: "/ar", label: "Try the Kala" },
 ];
 
 export function SiteNav() {
