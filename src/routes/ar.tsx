@@ -146,7 +146,7 @@ function ArStudio() {
     const maxZ = placed.length > 0 ? Math.max(...placed.map((p) => p.zIndex)) : 0;
     const count = placed.length;
     // Offset presets so added pieces don't stack on the initial one.
-    const presets = [
+    const presets: [number, number][] = [
       [50, 45],
       [28, 32],
       [72, 32],
