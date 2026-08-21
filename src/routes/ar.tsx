@@ -68,21 +68,24 @@ const sourcePieces: SourcePiece[] = artists.map((a) => ({
   image: a.image,
 }));
 
-let idCounter = 1;
-const nextId = () => String(idCounter++);
-
 function ArStudio() {
   const { art, mode: urlMode } = Route.useSearch();
-  const [mode, setMode] = useState<"single" | "gallery">(urlMode);
+  const [mode, setMode] = useState<"single" | "gallery">(urlMode ?? "single");
+
+  const baseId = useId();
+  const idRef = useRef(1);
+  const nextId = () => `${baseId}-${idRef.current++}`;
 
   const initialArtistId = useMemo(
     () => sourcePieces.find((p) => p.id === art)?.id ?? sourcePieces[0]!.id,
     [art],
   );
 
+  const initialPieceId = useMemo(() => nextId(), []);
+
   const [placed, setPlaced] = useState<PlacedPiece[]>([
     {
-      instanceId: nextId(),
+      instanceId: initialPieceId,
       artistId: initialArtistId,
       x: 50,
       y: 45,
@@ -92,7 +95,7 @@ function ArStudio() {
       zIndex: 0,
     },
   ]);
-  const [selectedId, setSelectedId] = useState<string>(placed[0]!.instanceId);
+  const [selectedId, setSelectedId] = useState<string>(initialPieceId);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
